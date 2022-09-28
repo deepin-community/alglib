@@ -1,0 +1,82 @@
+#!/bin/sh
+# autopkgtest check: Build and run a program against alglib
+# (C) 2013 Thomas Moulard
+# (C) 2014 Anton Gladky
+# Author: Thomas Moulard <thomas.moulard@gmail.com>
+#         Anton Gladky <gladk@debian.org>
+
+set -e
+
+WORKDIR=$(mktemp -d)
+echo $WORKDIR
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+mkdir src
+cd src
+
+cat <<EOF > CMakeLists.txt
+cmake_minimum_required(VERSION 3.7)
+project(demo)
+find_package(ALGLIB REQUIRED)
+include_directories(\${ALGLIB_INCLUDE_DIRS})
+
+add_executable(demo demo.cpp)
+target_link_libraries(demo \${ALGLIB_LIB})
+install(TARGETS demo DESTINATION bin)
+
+EOF
+
+cat <<EOF > demo.cpp
+#include <stdio.h>
+#include "linalg.h"
+
+int main()
+{
+    alglib::real_2d_array a, b, c;
+    int n = 2000;
+    int i, j;
+    double timeneeded, flops;
+    
+    // Initialize arrays
+    a.setlength(n, n);
+    b.setlength(n, n);
+    c.setlength(n, n);
+    for(i=0; i<n; i++)
+        for(j=0; j<n; j++)
+        {
+            a[i][j] = alglib::randomreal()-0.5;
+            b[i][j] = alglib::randomreal()-0.5;
+            c[i][j] = 0.0;
+        }
+    
+    // Set number of worker threads: "4" means "use 4 cores".
+    // This line is ignored if AE_OS is UNDEFINED.
+    alglib::setnworkers(4);
+    
+    // Perform matrix-matrix product.
+    // We call function with "smp_" prefix, which means that ALGLIB
+    // will try to execute it in parallel manner whenever it is possible.
+    flops = 2*pow((double)n, (double)3);
+    alglib::rmatrixgemm(
+        n, n, n,
+        1.0,
+        a, 0, 0, 0,
+        b, 0, 0, 1,
+        0.0,
+        c, 0, 0);
+    
+    return 0;
+}
+
+EOF
+
+cd ..
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=./../inst ./../src
+make
+make install
+echo "build: OK"
+[ -x demo ]
+./demo
+echo "run: OK"

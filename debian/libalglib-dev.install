@@ -1,0 +1,3 @@
+usr/include
+usr/lib/*/libalglib.so
+usr/lib/*/cmake/

@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+ifneq (,$(findstring $(DEB_HOST_ARCH), i386 mipsel hurd-i386 kfreebsd-i386 ))
+    export DEB_CFLAGS_MAINT_APPEND = -ffloat-store
+    export DEB_CXXFLAGS_MAINT_APPEND = -ffloat-store
+endif
+
+%:
+	dh $@
+
+UPSTREAM_VERSION=3.17
+
+override_dh_auto_configure:
+	dh_auto_configure -- -DVERSION="$(UPSTREAM_VERSION).0" -DSOVERSION="$(UPSTREAM_VERSION)"
+
+# Disable auto test for the mips platform, because it fails sometimes
+# on weak machiens with timouts
+disable_auto_test_archs = mips
+ifneq (,$(filter $(DEB_HOST_ARCH),$(disable_auto_test_archs)))
+override_dh_auto_test:
+endif

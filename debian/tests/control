@@ -1,0 +1,2 @@
+Tests: build1 build2 build3 build4 build5
+Depends: libalglib-dev, build-essential, cmake

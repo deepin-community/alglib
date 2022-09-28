@@ -1,0 +1,348 @@
+alglib (3.17.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * [16f7f86] Fix autopkgtest regression with CMake 3.19+ (Closes: #994488)
+
+ -- Timo Röhling <roehling@debian.org>  Thu, 16 Sep 2021 18:29:16 +0200
+
+alglib (3.17.0-2) unstable; urgency=medium
+
+  * [d17b839] Disable unreliable minlp test
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 07 Jan 2021 19:59:58 +0100
+
+alglib (3.17.0-1) unstable; urgency=medium
+
+  * [103ed9f] Refresh patch
+  * [ee9d477] Fix typo
+  * [ed96751] Add .gitlab-ci.yml
+  * [32193d8] New upstream version 3.17.0
+  * [c73c09b] Update so-version
+  * [411687e] Update watch file format version to 4.
+  * [f033c50] Update standards version to 4.5.0, no changes needed.
+  * [78f6a90] Remove Priority on libalglib-dev that duplicates source.
+  * [21faa3a] Set Standards-Version to 4.5.1
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 06 Jan 2021 19:37:41 +0100
+
+alglib (3.16.0-1) unstable; urgency=medium
+
+  * [d432303] New upstream version 3.16.0
+  * [6fd12f6] Set compat-level 12
+  * [c5bc566] Set Standards-Version: 4.4.1
+  * [e7911f7] Trim trailing whitespace.
+  * [139e7f8] Use secure URI in debian/watch.
+  * [96bf324] Use secure URI in Homepage field.
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 02 Jan 2020 21:18:29 +0100
+
+alglib (3.14.0-3) unstable; urgency=medium
+
+  * [4426d48] Fix autopkgtest
+
+ -- Anton Gladky <gladk@debian.org>  Mon, 03 Dec 2018 23:38:48 +0100
+
+alglib (3.14.0-2) unstable; urgency=medium
+
+  * [629add4] Disable lsfit test, failing sometimes on mipsel
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 02 Dec 2018 20:07:43 +0100
+
+alglib (3.14.0-1) unstable; urgency=medium
+
+  * Upload into unstable.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 30 Nov 2018 22:02:13 +0100
+
+alglib (3.14.0-1~exp3) experimental; urgency=medium
+
+  * [9dc85d6] One more try to disable minlm test
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 18 Nov 2018 00:20:25 +0100
+
+alglib (3.14.0-1~exp2) experimental; urgency=medium
+
+  [ Jelmer Vernooĳ ]
+  * Trim trailing whitespace.
+
+  [ Anton Gladky ]
+  * [1b70352] Disable unreliable minlm test
+
+ -- Anton Gladky <gladk@debian.org>  Sat, 17 Nov 2018 21:35:16 +0100
+
+alglib (3.14.0-1~exp1) experimental; urgency=medium
+
+  * [cb4e129] Fix line endings
+  * [e4df8e1] New upstream version 3.14.0
+  * [7d9ae4e] Refresh patch, remove old one
+  * [1c64cc9] Update VCS-fields
+  * [3bee2b6] Update Standards-Version to 4.2.1
+  * [8131f1a] Set compat level to 11
+  * [a01bdc9] Remove Testsuite-field from d/control
+  * [2626a68] Rename the package due to so-version increase
+  * [bd75b15] Replace priority extra by optional
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 30 Sep 2018 22:44:11 +0200
+
+alglib (3.11.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * [a508c14] d/rules: Add -ffloat-store flag to more 32 bit archs
+
+ -- Gert Wollny <gewo@debian.org>  Tue, 10 Oct 2017 12:24:58 +0000
+
+alglib (3.11.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * [6148f06] d/rules: add -ffloat-store for i386, Closes: #877065
+  * [ea994a2] d/control: standards 4.1.1, no changes needed
+
+ -- Gert Wollny <gewo@debian.org>  Tue, 10 Oct 2017 08:58:45 +0000
+
+alglib (3.11.0-1) unstable; urgency=medium
+
+  * Upload into unstable.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 14 Jul 2017 22:26:42 +0200
+
+alglib (3.11.0-1~exp4) experimental; urgency=medium
+
+  * [ef71752] Disable auto_tests on mips (sometimes fails du to timeouts)
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 12 Jul 2017 08:31:18 +0200
+
+alglib (3.11.0-1~exp3) experimental; urgency=medium
+
+  * [cf5caa6] One more try to disable minlm test.
+
+ -- Anton Gladky <gladk@debian.org>  Tue, 11 Jul 2017 20:41:08 +0200
+
+alglib (3.11.0-1~exp2) experimental; urgency=medium
+
+  * [b981969] Disable minlm test.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 07 Jul 2017 23:00:44 +0200
+
+alglib (3.11.0-1~exp1) experimental; urgency=medium
+
+  * [6b25eb3] Remove disable-test patch.
+  * [08fd12a] Switch to the next upstream version 3.11
+  * [4f42229] Switch to the compat level 10.
+  * [2bde9bd] Enable tests on all platforms.
+  * [1ba52a0] New upstream version 3.11.0
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 19 May 2017 15:20:28 +0200
+
+alglib (3.10.0-2) unstable; urgency=medium
+
+  * [ef11ade] Apply cme fix dpkg.
+  * [ead797e] Drop -dbg-package.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 26 Aug 2016 22:56:37 +0200
+
+alglib (3.10.0-1) unstable; urgency=medium
+
+  * [f1b452c] Imported Upstream version 3.10.0
+  * [b7f61ce] Refresh patches.
+  * [dced4e3] Update so-version.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 26 Aug 2015 22:21:05 +0200
+
+alglib (3.9.0-4) unstable; urgency=medium
+
+  * [4606ae9] Use config-file for cmake.
+  * [b7d1beb] Do not start tests on mipsel.
+  * [ca613d0] Update autopkgtests, use cmake
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 12 Aug 2015 11:24:39 +0200
+
+alglib (3.9.0-3) unstable; urgency=medium
+
+  * [d1a146e] Rename libalglib3.9 due to GCC-5 transition. (Closes: #790977)
+
+ -- Anton Gladky <gladk@debian.org>  Tue, 11 Aug 2015 16:35:19 +0200
+
+alglib (3.9.0-2) unstable; urgency=medium
+
+  * [2122287] Disable autotest on mips. (Closes: #787448)
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 04 Jun 2015 23:28:41 +0200
+
+alglib (3.9.0-1) unstable; urgency=medium
+
+  [ Vincent Nivoliers ]
+  * [6cb9e05] Put headers into /usr/include/libalglib. (Closes: #782702)
+
+  [ Anton Gladky ]
+  * [c8f35e6] Provide FindALGLIB.cmake.
+  * [8bbcde8] Disable minlm test
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 29 May 2015 18:46:08 +0200
+
+alglib (3.9.0-1~exp1) experimental; urgency=medium
+
+  * [beda8d2] Update d/watch.
+  * [accc7cf] Update d/copyright.
+  * [cb4a077] Imported Upstream version 3.9.0
+  * [221bf55] Remove patch, which is disabling some autotests.
+  * [90f5736] Set Standards-Version: 3.9.6. No changes.
+  * [4ec0574] Update lib version to 3.9.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 04 Mar 2015 22:49:01 +0100
+
+alglib (3.8.2-3) unstable; urgency=medium
+
+  * [d503b10] Fix autopkgtests. (Closes: #748683)
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 23 May 2014 20:21:20 +0200
+
+alglib (3.8.2-2) unstable; urgency=medium
+
+  * [c95abb4] Add autopkgtests.
+
+ -- Anton Gladky <gladk@debian.org>  Sat, 10 May 2014 17:18:33 +0200
+
+alglib (3.8.2-1) unstable; urgency=low
+
+  * [a6b0053] Imported Upstream version 3.8.2
+  * [f6a238d] Refresh patch.
+  * [6145e76] Set Standards-Version 3.9.5, no changes.
+
+ -- Anton Gladky <gladk@debian.org>  Sat, 30 Nov 2013 18:45:20 +0100
+
+alglib (3.8.1-2) unstable; urgency=low
+
+  * [5999277] Disable 2 tests, which are randloomly failing on some archs.
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 10 Nov 2013 13:43:12 +0100
+
+alglib (3.8.1-1) unstable; urgency=low
+
+  * [4bb891e] Imported Upstream version 3.8.1
+  * [86a896e] Use wrap-and-sort.
+  * [e1537ec] Enable all tests.
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 10 Nov 2013 09:43:55 +0100
+
+alglib (3.8.0-3) unstable; urgency=low
+
+  * [99347fa] Disable evd-test, unreliable on ia64.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 06 Sep 2013 07:34:59 +0200
+
+alglib (3.8.0-2) unstable; urgency=low
+
+  * [88839b9] Disable minlm and pspline tests, because they are
+              failing on some platforms.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 04 Sep 2013 21:23:05 +0200
+
+alglib (3.8.0-1) unstable; urgency=low
+
+  * [5da67f0] Imported Upstream version 3.8.0
+  * [c6285c2] Refresh patches. Enable all tests.
+  * [4d4fe28] Changes due to change of so-names.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 30 Aug 2013 22:10:10 +0200
+
+alglib (3.7.0-7) unstable; urgency=low
+
+  * [144572e] Disable evd-test.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 07 Jun 2013 22:26:32 +0200
+
+alglib (3.7.0-6) unstable; urgency=low
+
+  * [7f6ebb3] Update versions in breaks/replaces sections.
+  * [a4a25fa] Disable pspline test.
+  * [135b323] Use canonical VCS-field.
+  * [ce652b6] Set Multi-Arch: same for libalglib3.7-dbg.
+
+ -- Anton Gladky <gladk@debian.org>  Fri, 07 Jun 2013 07:49:20 +0200
+
+alglib (3.7.0-5) unstable; urgency=low
+
+  * [d579857] Replace libalglib3 by libalglib3.7 package. (Closes: #708584)
+
+ -- Anton Gladky <gladk@debian.org>  Sun, 26 May 2013 23:34:37 +0200
+
+alglib (3.7.0-4) unstable; urgency=low
+
+  * [ed6f21f] Disable some (they were not properly disabled during the
+              previous uploads).
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 16 May 2013 20:52:25 +0200
+
+alglib (3.7.0-3) unstable; urgency=low
+
+  * [5449f73] Disable one more minlm test.
+  * [65d9ddb] Add numbering to patches.
+  * [cf68cd0] Disable lsfit patch, as it fails on kfreebsd-i386.
+  * [b86747c] Add myself to uploaders.
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 16 May 2013 20:05:20 +0200
+
+alglib (3.7.0-2) unstable; urgency=low
+
+  * Team upload.
+  * Disable minlm test, as it fails on many archs.
+
+ -- Anton Gladky <gladk@debian.org>  Thu, 16 May 2013 00:06:54 +0200
+
+alglib (3.7.0-1) unstable; urgency=low
+
+  * Team upload.
+  * Merge from experimental to unstable.
+
+ -- Anton Gladky <gladk@debian.org>  Wed, 15 May 2013 21:24:06 +0200
+
+alglib (3.7.0-1~exp1) experimental; urgency=low
+
+  * Team upload
+  * [24826b4] Imported Upstream version 3.7.0
+  * [0d2f7bc] Replace autotools build by cmake.
+  * [679557b] Replace 2.6.0 version by 3.
+              Implement multiarch.
+  * [2b2d7d0] Use compat-level 9.
+  * [9ff7f12] Update copyright-file.
+
+ -- Anton Gladky <gladk@debian.org>  Tue, 30 Apr 2013 22:52:28 +0200
+
+alglib (2.6.0-6) unstable; urgency=low
+
+  * updated symbols files
+  * Moved examples to /usr/share/doc/ (Closes: #661977)
+
+ -- Scott Howard <showard@debian.org>  Sat, 03 Mar 2012 16:01:48 -0500
+
+alglib (2.6.0-5) unstable; urgency=low
+
+  * Merge from experimental to unstable, include symbols from other archs
+
+ -- Scott Howard <showard@debian.org>  Mon, 30 Jan 2012 15:54:34 -0500
+
+alglib (2.6.0-4) experimental; urgency=low
+
+  * Add symbols file, made with pkgkde-symbolshelper
+
+ -- Scott Howard <showard@debian.org>  Sat, 28 Jan 2012 11:53:15 -0500
+
+alglib (2.6.0-3) unstable; urgency=low
+
+  * Removed debian/*.symbols (exports private, optional symbols)
+
+ -- Scott Howard <showard@debian.org>  Sun, 10 Apr 2011 10:28:13 -0400
+
+alglib (2.6.0-2) unstable; urgency=low
+
+  * debian/control: made libaglib-2.6.0 Priority: optional
+  * removed *.la from debian/libalglib-dev.install
+  * refreshed symbols file (FTBFS on amd64)
+
+ -- Scott Howard <showard@debian.org>  Thu, 07 Apr 2011 19:04:14 -0400
+
+alglib (2.6.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #615008)
+
+ -- Scott Howard <showard@debian.org>  Sun, 06 Mar 2011 17:16:41 -0500

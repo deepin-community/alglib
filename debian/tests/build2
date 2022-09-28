@@ -1,0 +1,98 @@
+#!/bin/sh
+# autopkgtest check: Build and run a program against libmedc
+# (C) 2013 Thomas Moulard
+# (C) 2014 Anton Gladky
+# Author: Thomas Moulard <thomas.moulard@gmail.com>
+#         Anton Gladky <gladk@debian.org>
+
+set -e
+
+WORKDIR=$(mktemp -d)
+echo $WORKDIR
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+mkdir src
+cd src
+
+cat <<EOF > CMakeLists.txt
+cmake_minimum_required(VERSION 3.7)
+project(demo)
+find_package(ALGLIB REQUIRED)
+include_directories(\${ALGLIB_INCLUDE_DIRS})
+
+add_executable(demo demo.cpp)
+target_link_libraries(demo \${ALGLIB_LIB})
+install(TARGETS demo DESTINATION bin)
+
+EOF
+
+cat <<EOF > demo.cpp
+#include <stdio.h>
+#include "interpolation.h"
+
+int main()
+{   alglib::real_1d_array    x("[0,1,2,3]");
+    alglib::real_1d_array    y("[1,5,3,9]");
+    alglib::real_1d_array   y2("[1,5,3,9,0]");
+    alglib::spline1dinterpolant s;
+    
+    alglib::spline1dbuildlinear(x, y, 4, s);  // 'expert' interface is used
+    alglib::spline1dbuildlinear(x, y, s);     // 'friendly' interface - input size is
+                                              // automatically determined
+    
+    alglib::spline1dbuildlinear(x, y2, 4, s); // y2.length() is 5, but it will work
+    
+    
+    
+    alglib::real_2d_array a;
+    alglib::matinvreport  rep;
+    alglib::ae_int_t      info;
+    
+    // 
+    // 'Friendly' interface: spdmatrixinverse() accepts and returns symmetric matrix
+    // 
+    
+    // symmetric positive definite matrix
+    a = "[[2,1],[1,2]]";
+    
+    // after this line A will contain [[0.66,-0.33],[-0.33,0.66]]
+    // which is symmetric too
+    alglib::spdmatrixinverse(a, info, rep); 
+    
+    // you may try to pass nonsymmetric matrix
+    a = "[[2,1],[0,2]]";
+    
+    {
+        alglib::real_2d_array a;
+        alglib::matinvreport  rep;
+        alglib::ae_int_t      info;
+        
+        // 
+        // 'Expert' interface, spdmatrixinverse()
+        // 
+        
+        // only upper triangle is used; a[1][0] is initialized by NAN,
+        // but it can be arbitrary number
+        a = "[[2,1],[NAN,2]]";
+        
+        // after this line A will contain [[0.66,-0.33],[NAN,0.66]]
+        // only upper triangle is modified
+        alglib::spdmatrixinverse(a, 2 /* N */, true /* upper triangle is used */, info, rep); 
+    }
+    
+    return 0;
+}
+
+EOF
+
+cd ..
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=./../inst ./../src
+make
+make install
+echo "build: OK"
+[ -x demo ]
+./demo
+echo "run: OK"
+

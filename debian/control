@@ -1,0 +1,59 @@
+Source: alglib
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Uploaders: Scott Howard <showard@debian.org>,
+           Gudjon I. Gudjonsson <gudjon@gudjon.org>,
+           Anton Gladky <gladk@debian.org>
+Section: libs
+Priority: optional
+Build-Depends: cmake,
+               debhelper-compat (= 12)
+Standards-Version: 4.5.1
+Vcs-Browser: https://salsa.debian.org/science-team/alglib
+Vcs-Git: https://salsa.debian.org/science-team/alglib.git
+Homepage: https://www.alglib.net/
+
+Package: libalglib-dev
+Architecture: any
+Section: libdevel
+Depends: libalglib3.17 (= ${binary:Version}),
+         ${misc:Depends}
+Description: Development files for the alglib library
+ ALGLIB is a cross-platform numerical analysis and data processing library.
+ This package support C++. ALGLIB features include:
+ .
+    * Linear algebra (direct algorithms, EVD/SVD)
+    * Solvers (linear and nonlinear)
+    * Interpolation
+    * Optimization
+    * Fast Fourier transforms
+    * Numerical integration
+    * Linear and nonlinear least-squares fitting
+    * Ordinary differential equations
+    * Special functions
+    * Statistics (descriptive statistics, hypothesis testing)
+    * Data analysis (classification/regression, including neural networks)
+ .
+ This package contains the development files (headers and documentation) for
+ ALGLIB.
+
+Package: libalglib3.17
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: Numerical analysis and data processing library
+ ALGLIB is a cross-platform numerical analysis and data processing library.
+ This package support C++. ALGLIB features include:
+ .
+    * Linear algebra (direct algorithms, EVD/SVD)
+    * Solvers (linear and nonlinear)
+    * Interpolation
+    * Optimization
+    * Fast Fourier transforms
+    * Numerical integration
+    * Linear and nonlinear least-squares fitting
+    * Ordinary differential equations
+    * Special functions
+    * Statistics (descriptive statistics, hypothesis testing)
+    * Data analysis (classification/regression, including neural networks)

@@ -1,0 +1,102 @@
+#!/bin/sh
+# autopkgtest check: Build and run a program against libmedc
+# (C) 2013 Thomas Moulard
+# (C) 2014 Anton Gladky
+# Author: Thomas Moulard <thomas.moulard@gmail.com>
+#         Anton Gladky <gladk@debian.org>
+
+set -e
+
+WORKDIR=$(mktemp -d)
+echo $WORKDIR
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+mkdir src
+cd src
+
+cat <<EOF > CMakeLists.txt
+cmake_minimum_required(VERSION 3.7)
+project(demo)
+find_package(ALGLIB REQUIRED)
+include_directories(\${ALGLIB_INCLUDE_DIRS})
+
+add_executable(demo demo.cpp)
+target_link_libraries(demo \${ALGLIB_LIB})
+install(TARGETS demo DESTINATION bin)
+
+EOF
+
+cat <<EOF > demo.cpp
+#include "stdafx.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include "linalg.h"
+
+using namespace alglib;
+
+
+int main(int argc, char **argv)
+{
+    //
+    // rmatrixsyrk() function allows us to calculate symmetric rank-K update
+    // C := beta*C + alpha*A'*A, where C is square N*N matrix, A is square K*N
+    // matrix, alpha and beta are scalars. It is also possible to update by
+    // adding A*A' instead of A'*A.
+    //
+    // Parameters of this function are:
+    // * N, K       -   matrix size
+    // * Alpha      -   coefficient before A
+    // * A, IA, JA  -   matrix and submatrix offsets
+    // * OpTypeA    -   multiplication type:
+    //                  * 0 - A*A^T is calculated
+    //                  * 2 - A^T*A is calculated
+    // * Beta       -   coefficient before C
+    // * C, IC, JC  -   preallocated input/output matrix and submatrix offsets
+    // * IsUpper    -   whether upper or lower triangle of C is updated;
+    //                  this function updates only one half of C, leaving
+    //                  other half unchanged (not referenced at all).
+    //
+    // Below we will show how to calculate simple product C:=A'*A
+    //
+    // NOTE: beta=0 and we do not use previous value of C, but still it
+    //       MUST be preallocated.
+    //
+    ae_int_t n = 2;
+    ae_int_t k = 1;
+    double alpha = 1.0;
+    ae_int_t ia = 0;
+    ae_int_t ja = 0;
+    ae_int_t optypea = 2;
+    double beta = 0.0;
+    ae_int_t ic = 0;
+    ae_int_t jc = 0;
+    bool isupper = true;
+    real_2d_array a = "[[1,2]]";
+
+    // preallocate space to store result
+    real_2d_array c = "[[0,0],[0,0]]";
+
+    // calculate product, store result into upper part of c
+    rmatrixsyrk(n, k, alpha, a, ia, ja, optypea, beta, c, ic, jc, isupper);
+
+    // output result.
+    // IMPORTANT: lower triangle of C was NOT updated!
+    printf("%s\n", c.tostring(3).c_str()); // EXPECTED: [[1,2],[0,4]]
+    return 0;
+}
+
+
+EOF
+
+cd ..
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=./../inst ./../src
+make
+make install
+echo "build: OK"
+[ -x demo ]
+./demo
+echo "run: OK"
+
